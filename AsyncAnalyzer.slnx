@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AsyncAnalyzer/AsyncAnalyzer.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AsyncAnalyzer.Tests/AsyncAnalyzer.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,31 @@
+name: AsyncAnalyzer
+
+on:
+  push:
+    paths:
+      - 'AsyncGuard/**'
+      - '.github/workflows/async-analyzer.yml'
+  pull_request:
+    paths:
+      - 'AsyncGuard/**'
+      - '.github/workflows/async-analyzer.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: AsyncGuard
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: AsyncGuard/global.json
+      - run: dotnet restore
+      - run: dotnet build -c Release --no-restore
+      - run: dotnet test -c Release --no-build --filter 'Category!=Measurement'
+      - run: dotnet format --no-restore --verify-no-changes
+      - run: pwsh -NoProfile -File demo/verify.ps1

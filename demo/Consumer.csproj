@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <DemoVariant Condition="'$(DemoVariant)' == ''">Before</DemoVariant>
+    <AsyncAnalyzerVersion Condition="'$(AsyncAnalyzerVersion)' == ''">0.1.0</AsyncAnalyzerVersion>
+    <RestoreSources>$(MSBuildThisFileDirectory)../artifacts/feed</RestoreSources>
+    <RestorePackagesPath>$(MSBuildThisFileDirectory)../artifacts/demo-cache</RestorePackagesPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(DemoVariant)/Program.cs" />
+    <PackageReference Include="AsyncAnalyzer" Version="[$(AsyncAnalyzerVersion)]" PrivateAssets="all" />
+  </ItemGroup>
+</Project>
